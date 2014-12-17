@@ -1,0 +1,3 @@
+THE WEB SERVICES IS:
+
+http://footballpool.dataaccess.eu/data/info.wso?WSDL
