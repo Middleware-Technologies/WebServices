@@ -5,6 +5,7 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -175,7 +176,9 @@ public class ClientFrame extends JFrame
 					Path path = Paths.get("C:/Users/Luca/Desktop/"+txtImageName.getText());
 					byte[] data = Files.readAllBytes(path);
 					
-					portService.uploadImage(data, txtImageName.getText());
+					String message=portService.uploadImage(data, txtImageName.getText());
+					JOptionPane.showMessageDialog(null,message);
+					
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

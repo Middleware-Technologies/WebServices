@@ -18,12 +18,10 @@ import server.ImageWS;
 
 public class ImageWSImpl implements ImageWS 
 {
-	static int counter;
 	static String urlImage;
 	
 	public static void Setting(String url) 
 	{
-		counter = 0;
 		urlImage=url;
 	}
 	
@@ -39,12 +37,8 @@ public class ImageWSImpl implements ImageWS
 			try 
 			{
 				ImageIO.write(rImage, "jpg", new File(urlImage+"Received" + name));
-				counter++;
 				return "Upload Success";
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (IOException e) {}
 			return "Upload Error";
 		}
 		return "Data was null";
