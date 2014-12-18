@@ -134,7 +134,7 @@ public class ClientFrame extends JFrame
 					Path path = Paths.get(chosenFile.getPath());
 					byte[] data = Files.readAllBytes(path);
 					
-					String message=portService.uploadImage(data, txtImageName.getText());
+					String message=portService.uploadImage(data, chosenFile.getName());
 					JOptionPane.showMessageDialog(null,message);
 					
 				} catch (IOException e1) {
