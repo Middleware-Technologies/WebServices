@@ -4,6 +4,7 @@ import java.awt.Image;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -35,6 +37,7 @@ public class ClientFrame extends JFrame
 	
 	private JButton btnClose;
 	private JButton btnDraw;
+	private JButton btnUpload;
 	
 	private JLabel lblServerName;
 	private JLabel lblServerPort;
@@ -46,59 +49,7 @@ public class ClientFrame extends JFrame
 
 	public ClientFrame() 
 	{
-		setResizable(false);
-		setTitle("Client");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 316, 305);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		lblServerName = new JLabel("Server Name");
-		lblServerName.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblServerName.setBounds(10, 21, 89, 14);
-		contentPane.add(lblServerName);
-		
-		lblServerPort = new JLabel("Server Port");
-		lblServerPort.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblServerPort.setBounds(10, 57, 89, 14);
-		contentPane.add(lblServerPort);
-		
-		lblImageName = new JLabel("Image Name");
-		lblImageName.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblImageName.setBounds(10, 93, 89, 14);
-		contentPane.add(lblImageName);
-		
-		txtServerName = new JTextField();
-		txtServerName.setBounds(98, 16, 200, 23);
-		txtServerName.setText("Luca-Pc");
-		contentPane.add(txtServerName);
-		txtServerName.setColumns(10);
-		
-		txtServerPort = new JTextField();
-		txtServerPort.setColumns(10);
-		txtServerPort.setBounds(98, 52, 200, 23);
-		txtServerPort.setText("9999");
-		contentPane.add(txtServerPort);
-		
-		txtImageName = new JTextField();
-		txtImageName.setColumns(10);
-		txtImageName.setBounds(98, 88, 200, 23);
-		contentPane.add(txtImageName);
-		
-		btnClose = new JButton("Close");
-		btnClose.setBounds(10, 224, 288, 38);
-		contentPane.add(btnClose);
-		
-		btnDraw = new JButton("Draw");
-		btnDraw.setBounds(10, 124, 288, 38);
-		contentPane.add(btnDraw);
-		
-		JButton btnUpload = new JButton("Upload Image");
-		btnUpload.setBounds(10, 174, 288, 38);
-		contentPane.add(btnUpload);
-					
+		this.renderForm();					
 		btnClose.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -106,7 +57,7 @@ public class ClientFrame extends JFrame
 				System.exit(0);
 			}
 		});
-		
+	
 		btnDraw.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -146,7 +97,7 @@ public class ClientFrame extends JFrame
 				}		
 			}
 		});
-	
+
 		btnUpload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
@@ -168,8 +119,19 @@ public class ClientFrame extends JFrame
 				sBinding.setMTOMEnabled(true);
 				
 				// Code for upload 
-				try {					
-					Path path = Paths.get("C:/Users/Luca/Desktop/"+txtImageName.getText());
+				try 
+				{
+					JFileChooser chooser= new JFileChooser();
+
+					int choice = chooser.showOpenDialog(null);
+
+					if (choice != JFileChooser.APPROVE_OPTION) 
+					{
+						JOptionPane.showMessageDialog(null,"Select A File");
+						return;
+					}
+					File chosenFile = chooser.getSelectedFile();		
+					Path path = Paths.get(chosenFile.getPath());
 					byte[] data = Files.readAllBytes(path);
 					
 					String message=portService.uploadImage(data, txtImageName.getText());
@@ -181,5 +143,61 @@ public class ClientFrame extends JFrame
 				}	
 			}
 		});
+	}
+	
+	private void renderForm()
+	{
+		setResizable(false);
+		setTitle("Client");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 295, 302);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblServerName = new JLabel("Server Name");
+		lblServerName.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblServerName.setBounds(10, 21, 89, 14);
+		contentPane.add(lblServerName);
+		
+		lblServerPort = new JLabel("Server Port");
+		lblServerPort.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblServerPort.setBounds(10, 57, 89, 14);
+		contentPane.add(lblServerPort);
+		
+		lblImageName = new JLabel("Image Name");
+		lblImageName.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblImageName.setBounds(10, 93, 89, 14);
+		contentPane.add(lblImageName);
+		
+		txtServerName = new JTextField();
+		txtServerName.setBounds(98, 16, 178, 23);
+		txtServerName.setText("Luca-Pc");
+		contentPane.add(txtServerName);
+		txtServerName.setColumns(10);
+		
+		txtServerPort = new JTextField();
+		txtServerPort.setColumns(10);
+		txtServerPort.setBounds(98, 52, 178, 23);
+		txtServerPort.setText("9999");
+		contentPane.add(txtServerPort);
+		
+		txtImageName = new JTextField();
+		txtImageName.setColumns(10);
+		txtImageName.setBounds(98, 88, 178, 23);
+		contentPane.add(txtImageName);
+		
+		btnClose = new JButton("Close");
+		btnClose.setBounds(10, 219, 266, 38);
+		contentPane.add(btnClose);
+		
+		btnDraw = new JButton("Draw");
+		btnDraw.setBounds(10, 119, 266, 38);
+		contentPane.add(btnDraw);
+		
+		btnUpload = new JButton("Upload Image");
+		btnUpload.setBounds(10, 169, 266, 38);
+		contentPane.add(btnUpload);
 	}
 }
