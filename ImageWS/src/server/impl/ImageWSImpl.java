@@ -38,7 +38,7 @@ public class ImageWSImpl implements ImageWS
 			RenderedImage rImage = (RenderedImage)bImage;
 			try 
 			{
-				ImageIO.write(rImage, "jpg", new File(urlImage + name));
+				ImageIO.write(rImage, "jpg", new File(urlImage+"Received" + name));
 				counter++;
 				return "Upload Success";
 			} catch (IOException e) {
