@@ -15,7 +15,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -28,11 +27,6 @@ import javax.xml.ws.soap.SOAPBinding;
 
 import support.ImageWS;
 import support.ImageWSImplService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-
 
 public class ClientFrame extends JFrame 
 {
