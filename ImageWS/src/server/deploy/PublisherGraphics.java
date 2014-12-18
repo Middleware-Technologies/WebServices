@@ -43,15 +43,17 @@ public class PublisherGraphics extends JFrame
 
 	public PublisherGraphics() 
 	{
+		setTitle("Server");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 306, 258);
+		setBounds(100, 100, 355, 257);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		txtServerName = new JTextField();
-		txtServerName.setBounds(148, 11, 129, 27);
+		txtServerName.setBounds(121, 11, 216, 27);
 		try 
 		{
 			txtServerName.setText(InetAddress.getLocalHost().getHostName());
@@ -64,37 +66,37 @@ public class PublisherGraphics extends JFrame
 		
 		txtPort = new JTextField();
 		txtPort.setColumns(10);
-		txtPort.setBounds(148, 49, 129, 27);
+		txtPort.setBounds(121, 49, 216, 27);
 		contentPane.add(txtPort);
 		txtPort.setText("9999");
 		
 		txtFolder = new JTextField();
 		txtFolder.setColumns(10);
-		txtFolder.setBounds(148, 87, 129, 27);
+		txtFolder.setBounds(121, 87, 216, 27);
 		contentPane.add(txtFolder);
 		txtFolder.setText("C:/Users/Luca/Desktop/");
 		
 		JLabel lblServerName = new JLabel("Server Name");
-		lblServerName.setFont(new Font("Calibri", Font.BOLD, 13));
+		lblServerName.setFont(new Font("Calibri", Font.BOLD, 14));
 		lblServerName.setBounds(10, 17, 78, 14);
 		contentPane.add(lblServerName);
 		
 		JLabel lblServerPort = new JLabel("Server Port");
-		lblServerPort.setFont(new Font("Calibri", Font.BOLD, 13));
+		lblServerPort.setFont(new Font("Calibri", Font.BOLD, 14));
 		lblServerPort.setBounds(10, 55, 78, 14);
 		contentPane.add(lblServerPort);
 		
 		JLabel lblImageDirectory = new JLabel("Image Directory");
-		lblImageDirectory.setFont(new Font("Calibri", Font.BOLD, 13));
+		lblImageDirectory.setFont(new Font("Calibri", Font.BOLD, 14));
 		lblImageDirectory.setBounds(10, 93, 99, 14);
 		contentPane.add(lblImageDirectory);
 		
 		btnPublish = new JButton("Publish");
-		btnPublish.setBounds(10, 130, 267, 38);
+		btnPublish.setBounds(10, 130, 327, 38);
 		contentPane.add(btnPublish);
 		
 		btnClose = new JButton("Close");
-		btnClose.setBounds(10, 179, 267, 38);
+		btnClose.setBounds(10, 179, 327, 38);
 		contentPane.add(btnClose);
 		
 		btnClose.addMouseListener(new MouseAdapter() {

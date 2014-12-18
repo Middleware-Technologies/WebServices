@@ -46,8 +46,10 @@ public class ClientFrame extends JFrame
 
 	public ClientFrame() 
 	{
+		setResizable(false);
+		setTitle("Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 385, 179);
+		setBounds(100, 100, 316, 305);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,46 +57,46 @@ public class ClientFrame extends JFrame
 		
 		lblServerName = new JLabel("Server Name");
 		lblServerName.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblServerName.setBounds(10, 11, 89, 14);
+		lblServerName.setBounds(10, 21, 89, 14);
 		contentPane.add(lblServerName);
 		
 		lblServerPort = new JLabel("Server Port");
 		lblServerPort.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblServerPort.setBounds(10, 36, 89, 14);
+		lblServerPort.setBounds(10, 57, 89, 14);
 		contentPane.add(lblServerPort);
 		
 		lblImageName = new JLabel("Image Name");
 		lblImageName.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblImageName.setBounds(10, 67, 89, 14);
+		lblImageName.setBounds(10, 93, 89, 14);
 		contentPane.add(lblImageName);
 		
 		txtServerName = new JTextField();
-		txtServerName.setBounds(91, 7, 268, 23);
+		txtServerName.setBounds(98, 16, 200, 23);
 		txtServerName.setText("Luca-Pc");
 		contentPane.add(txtServerName);
 		txtServerName.setColumns(10);
 		
 		txtServerPort = new JTextField();
 		txtServerPort.setColumns(10);
-		txtServerPort.setBounds(91, 35, 268, 23);
+		txtServerPort.setBounds(98, 52, 200, 23);
 		txtServerPort.setText("9999");
 		contentPane.add(txtServerPort);
 		
 		txtImageName = new JTextField();
 		txtImageName.setColumns(10);
-		txtImageName.setBounds(91, 63, 268, 23);
+		txtImageName.setBounds(98, 88, 200, 23);
 		contentPane.add(txtImageName);
 		
 		btnClose = new JButton("Close");
-		btnClose.setBounds(270, 97, 89, 38);
+		btnClose.setBounds(10, 224, 288, 38);
 		contentPane.add(btnClose);
 		
-		btnDraw = new JButton("Download Image");
-		btnDraw.setBounds(10, 97, 120, 38);
+		btnDraw = new JButton("Draw");
+		btnDraw.setBounds(10, 124, 288, 38);
 		contentPane.add(btnDraw);
 		
 		JButton btnUpload = new JButton("Upload Image");
-		btnUpload.setBounds(140, 97, 120, 38);
+		btnUpload.setBounds(10, 174, 288, 38);
 		contentPane.add(btnUpload);
 					
 		btnClose.addMouseListener(new MouseAdapter() {
