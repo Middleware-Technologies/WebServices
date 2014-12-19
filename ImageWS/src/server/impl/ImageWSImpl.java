@@ -14,7 +14,7 @@ import javax.xml.ws.soap.MTOM;
 import server.ImageWS;
 
 @WebService(endpointInterface="server.ImageWS")
-@MTOM(enabled=true, threshold=2048)              //Trasferimento file binari
+@MTOM(enabled=true, threshold=2000)              //Trasferimento file binari
 
 public class ImageWSImpl implements ImageWS 
 {
@@ -26,16 +26,16 @@ public class ImageWSImpl implements ImageWS
 	}
 	
 	@Override
-	public String uploadImage(Image data, String name) 
+	public String uploadImage(Image data, String name)  //SEND IMAGE FROM CLIENT TO SERVER
 	{
 		if (data!=null) 
-		{
-			BufferedImage bImage = new BufferedImage(data.getWidth(null), data.getHeight(null), BufferedImage.TYPE_INT_RGB);
-			Graphics2D graphics = bImage.createGraphics();
-			graphics.drawImage(data, null, null);
-			RenderedImage rImage = (RenderedImage)bImage;
+		{	
 			try 
 			{
+				BufferedImage bImage = new BufferedImage(data.getWidth(null), data.getHeight(null), BufferedImage.TYPE_INT_RGB);
+				Graphics2D graphics = bImage.createGraphics();
+				graphics.drawImage(data, null, null);
+				RenderedImage rImage = (RenderedImage)bImage;
 				ImageIO.write(rImage, "jpg", new File(urlImage+"Received" + name));
 				return "Upload Success";
 			} catch (IOException e) {}
@@ -45,11 +45,13 @@ public class ImageWSImpl implements ImageWS
 	}
 
 	@Override
-	public Image downloadImage(String name) 
+	public Image downloadImage(String name)   //SEND IMAGE FROM SERVER TO CLIENT
 	{
 		Image returnImage = null;
-		try {
-			returnImage = ImageIO.read(new File(urlImage + name));
+		try 
+		{
+			String pathCompleto=urlImage+name;
+			returnImage = ImageIO.read(new File(pathCompleto));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

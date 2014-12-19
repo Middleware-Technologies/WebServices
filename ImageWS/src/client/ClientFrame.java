@@ -3,7 +3,6 @@ package client;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -61,39 +60,37 @@ public class ClientFrame extends JFrame
 		btnDraw.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) 
-			{
-				//SETTING THE SERVER
-				String host= txtServerName.getText();
-				int port=Integer.parseInt(txtServerPort.getText());
-				
-				String url="http://"+host+":"+port+"/ImageWS?wsdl";
-				ImageWSImplService.setting(url);
-				
-				//GETTING THE SERVICE
-				ImageWSImplService service = new ImageWSImplService();
-				ImageWS portService = service.getImageWSImplPort();
-				
-				//enable MTOM on the client side
-				BindingProvider bProvider = (BindingProvider)portService;
-				SOAPBinding sBinding = (SOAPBinding) bProvider.getBinding();
-				sBinding.setMTOMEnabled(true);
-				
-				// Code for downloading 
-				InputStream in = new ByteArrayInputStream(portService.downloadImage(txtImageName.getText()));
-				
+			{	
 				try
 				{
+					//SETTING THE SERVER
+					String host= txtServerName.getText();
+					int port=Integer.parseInt(txtServerPort.getText());
+					
+					String url="http://"+host+":"+port+"/ImageWS?wsdl";
+					ImageWSImplService.setting(url);
+					
+					//GETTING THE SERVICE
+					ImageWSImplService service = new ImageWSImplService();
+					ImageWS portService = service.getImageWSImplPort();
+					
+					//enable MTOM on the client side
+					BindingProvider bProvider = (BindingProvider)portService;
+					SOAPBinding sBinding = (SOAPBinding) bProvider.getBinding();
+					sBinding.setMTOMEnabled(true);
+					
+					// Code for downloading 
+					byte[]buf=portService.downloadImage(txtImageName.getText());
+					InputStream in = new ByteArrayInputStream(buf);
 					Image image = ImageIO.read(in);	
 					
-					JFrame jframe = new JFrame();
-					jframe.setSize(image.getWidth(null), image.getHeight(null));
-					JLabel label = new JLabel(new ImageIcon(image));
-					jframe.getContentPane().add(label);
-					jframe.setVisible(true);
+					ImageDownloadedFrame frame=new ImageDownloadedFrame();
+					frame.setImage(image);
+					frame.setVisible(true);
 				} 
 				catch (IOException ex) 
 				{
-					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Error: "+ex.getMessage());
 				}		
 			}
 		});
