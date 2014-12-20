@@ -25,7 +25,6 @@ import javax.swing.JTextField;
 
 public class ImageDownloadedFrame extends JFrame 
 {
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Image im;
@@ -93,7 +92,6 @@ public class ImageDownloadedFrame extends JFrame
 				setVisible(false);
 			}
 		});
-
 	}
 	public void setImage(Image im)
 	{
@@ -102,15 +100,13 @@ public class ImageDownloadedFrame extends JFrame
 		int orizontal=0;
 		if(marginRight<im.getWidth(null))
 			orizontal=Math.abs(marginRight-im.getWidth(null)-50);
-		this.setBounds(100, 100, this.getWidth()+orizontal, this.im.getHeight(null)+100);
+		this.setBounds(100, 100, this.getWidth()+orizontal, this.im.getHeight(null)+60);
 		
 		
 		lblImage = new JLabel(new ImageIcon(im));
 		lblImage.setHorizontalTextPosition(JLabel.CENTER);
-		lblImage.setSize(this.im.getWidth(null), this.im.getHeight(null));
+		lblImage.setBounds(0, 50,this.im.getWidth(null), this.im.getHeight(null));
 		this.setResizable(false);
-		contentPane.add(lblImage);
-		
-
+		contentPane.add(lblImage);		
 	}
 }
