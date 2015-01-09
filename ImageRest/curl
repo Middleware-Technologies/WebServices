@@ -1,0 +1,9 @@
+curl http://localhost:8080/ImageREST/jaxrs/imageContainer
+
+curl -X PUT --data-binary "@sarah.jpg" http://localhost:8080/ImageREST/jaxrs/imageContainer/sarah
+
+curl -X PUT --data-binary "@chuck.jpg" http://localhost:8080/ImageREST/jaxrs/imageContainer/chuck
+
+
+
+curl -X PUT --data-binary "@{filename}" http://localhost:8080/ImageREST/jaxrs/imageContainer/{name}
